@@ -38,11 +38,67 @@ main{margin-left:190px;padding:0 22px 20px;max-width:1800px}
 footer{margin-top:30px;border-top:1px solid #8e642d;padding:17px;text-align:center;color:#c5a779;font-size:12px}
 @media(max-width:1250px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.cover{height:230px}}
 @media(max-width:900px){.sidebar{width:68px;padding:15px 7px}.logo{font-size:0}.logo .crown{font-size:24px}.logo small{display:none}.side-nav button{text-align:center;font-size:0;padding:13px 3px}.side-nav button::first-letter{font-size:18px}.side-quote{font-size:0}.side-quote:after{content:"✦";font-size:20px}main{margin-left:68px;padding:0 13px}.content{grid-template-columns:1fr}.panel{display:none}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:560px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.cover{height:190px}.hero{min-height:260px}.hero h1{font-size:47px}.book h3{font-size:14px}.book p{font-size:10px}.topline{height:43px}}
-</style></head><body><div class="app">
-<aside class="sidebar"><div class="logo"><span class="crown">♛</span>Prime Storys<small>— Read · Learn · Grow —</small></div>
-<nav class="side-nav"><button class="active" id="allNav">⌂ &nbsp; Home</button><button id="storiesNav">▣ &nbsp; All Stories</button><button id="categoriesNav">▦ &nbsp; Categories</button><button id="savedNav">♥ &nbsp; Favorites</button><button id="aboutNav">ⓘ &nbsp; About</button></nav>
-<div class="side-quote">“Great stories teach us more than just words.”<br><br>— Prime Storys</div></aside>
+/* Mobile Sidebar Toggle */
+/* Mobile Sidebar Toggle */
+.mobile-menu-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1001;
+        background: #f2c15d;
+        color: #100904;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 22px;
+    }
+
+    .sidebar {
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.hidden {
+        transform: translateX(-100%);
+    }
+
+    main {
+        margin-left: 0;
+        padding: 55px 12px 20px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<aside class="sidebar">
+    <div class="logo">
+        <span class="crown">♛</span>Prime Storys
+        <small>— Read · Learn · Grow —</small>
+    </div>
+    <nav class="side-nav">
+        <button class="active" id="allNav">⌂ &nbsp; Home</button>
+        <button id="storiesNav">▣ &nbsp; All Stories</button>
+        <button id="categoriesNav">▦ &nbsp; Categories</button>
+        <button id="savedNav">♥ &nbsp; Favorites</button>
+        <button id="aboutNav">ⓘ &nbsp; About</button>
+    </nav>
+    <div class="side-quote">
+        “Great stories teach us more than just words.”
+        <br><br>— Prime Storys
+    </div>
+</aside>
+
+<button class="mobile-menu-btn"
+onclick="toggleSidebar()"
+aria-label="Toggle sidebar">☰</button>
+
 <main id="library"><div class="topline"><button id="themeBtn">☼ / ☾</button><button id="yourLibrary">♟ Your Library</button></div>
 <section class="hero"><div class="hero-content"><div style="color:#f0c35e;letter-spacing:4px;font-size:11px">✦ A LIBRARY OF INSPIRATION ✦</div><h1>Prime <span>Storys</span> 🪶</h1><div class="tagline">Real Stories. Powerful Lessons.</div><p>Discover inspiring, real-life stories from around the world,<br>and learn valuable lessons for a better life.</p><form class="search" id="searchForm"><input id="searchInput" placeholder="⌕  Search for a story..." aria-label="Search for a story"><button>Search</button></form></div></section>
 <div class="filters" id="filters"><button class="filter active" data-cat="All">▦ All Stories</button><button class="filter" data-cat="Inspiration">★ Inspiration</button><button class="filter" data-cat="Entrepreneurs">🏆 Success</button><button class="filter" data-cat="Explorers">⌁ Adventure</button><button class="filter" data-cat="Feel-Good">♥ Feel-Good</button><button class="filter" data-cat="Mystery">♜ Mystery</button><button class="filter" data-cat="Scientists">⚛ Science & Tech</button><button class="filter" data-cat="Leaders">♜ History</button><button class="filter" data-cat="Pakistan">🇵🇰 Pakistan</button></div>
@@ -105,5 +161,11 @@ document.getElementById("yourLibrary").onclick=()=>document.getElementById("save
 document.getElementById("themeBtn").onclick=()=>document.body.classList.toggle("warm-mode");
 document.getElementById("savedNav").onclick=()=>{showFav=true;activeCat="All";document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x.dataset.cat==="All"));document.querySelectorAll(".side-nav button").forEach(x=>x.classList.remove("active"));document.getElementById("savedNav").classList.add("active");back()};
 render();
-</script>
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+
+    if (sidebar) {
+        sidebar.classList.toggle('hidden');
+    }
+}</script>
 </body></html>
